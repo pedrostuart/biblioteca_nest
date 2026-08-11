@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { LivrosModule } from './livros/livros.module';
+import { AutoresModule } from './autores/autores.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { LivrosModule } from './livros/livros.module';
       isGlobal: true
     }),
     DatabaseModule,
-    LivrosModule
+    LivrosModule,
+    AutoresModule
   ]
 })
 export class AppModule {}

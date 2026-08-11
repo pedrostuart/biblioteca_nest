@@ -7,3 +7,10 @@ create table livro(
     ano int not null,
     disponivel boolean not null default true
 )
+
+create table `autor`(
+	id int auto_increment primary key,
+    nome varchar(100) not null,
+    nacionalidade varchar(100) not null,
+    ano_nascimento int not null
+)
