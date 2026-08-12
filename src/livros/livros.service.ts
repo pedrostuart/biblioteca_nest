@@ -11,9 +11,8 @@ export class LivrosService {
     //vamos puxar o database service e colocar aqui, pra colocar os livrs dentro do banco de dados
     constructor (private readonly databaseService: DatabaseService){}//aqui ja injetamos o databseservice dentro do livrosService
         async criar (createLivroDto : CreateLivroDto){//a gente passa o "CreateLivroDto" para o parametro("createLivroDto") para nao modificar o "CreateLivroDto"
-            //aqui estamos desestruturando o deto para que a gente receba os valores
+            //aqui estamos desestruturando o dto para que a gente receba os valores
             const { titulo, autor, ano, disponivel } = createLivroDto;//Dto recebe o que a gente escreve e aqui esta passando pro banco
-
             
             const sql = //aqui a gente vai inserir no nosso banco de dados
             ` 
