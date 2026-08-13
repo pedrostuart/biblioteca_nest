@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAutorDto } from './dto/create-autor.dto'; 
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { DatabaseService } from 'src/database/database.service';
 @Injectable()
 export class AutoresService {
@@ -24,5 +24,21 @@ export class AutoresService {
                 ano_nascimento
             }
         }
+    }
+    async exibir(){
+        // o await serve pra dar um tempo para ele buscar essas informações
+        const resultado = await this.databaseService.query(
+        'SELECT * FROM autor'
+        )
+        return resultado
+    }
+    async exibirPorId(id:number){
+        const resultado = await this.databaseService.query('SELECT * FROM autor WHERE id = ?', [id]) as RowDataPacket[]
+
+        if (resultado.length === 0){
+            throw new NotFoundException('Id não encontrado')
+        }
+
+        return resultado[0]
     }
 }
