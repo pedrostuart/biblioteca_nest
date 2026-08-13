@@ -14,7 +14,7 @@ export class AutoresService {
         nome, nacionalidade, ano_nascimento)
         VALUES(?,?,?)
         `
-        const resultado = await this.databaseService.query(sql, [nome, nacionalidade, ano_nascimento]) as ResultSetHeader
+        const resultado = await this.databaseService.query(sql, [nome, nacionalidade, ano_nascimento]) as ResultSetHeader //mostra uma previa do que voce espera
         return{
             mensagem: "Autor cadastrado com sucesso",
             autor:{
@@ -25,5 +25,4 @@ export class AutoresService {
             }
         }
     }
-    
 }
