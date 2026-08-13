@@ -5,6 +5,7 @@ import { DatabaseService } from 'src/database/database.service';
 import { CreateLivroDto } from './dto/create-livro.dto'; // importando o DTO (regras)
 import { create } from 'domain';
 import { RowDataPacket } from 'mysql2'; // para fazer busca por id, com isso eu trago os dados do banco e consigo explorar um por um
+import { updateLivroDto } from './dto/update-livro.dto';
 
 @Injectable()
 export class LivrosService {
@@ -27,9 +28,9 @@ export class LivrosService {
                 titulo, autor, ano, disponivel
             ]) as ResultSetHeader // confirmação do que deveria acontecer
 
-            return {
-                meensagem: 'Livro cadastrado com sucesso',
-                livro:{
+            return { 
+                mensagem: 'Livro cadastrado com sucesso',
+                livro:{ // isso aqui é só pra pessoa ter um retorno visual do que ela colocou no POST, o que ela colocou vai ser exibido aqui no return
                     id: resultado.insertId, //pegando o id do banco (o id que o banco gerou)
                     titulo,
                     autor,
@@ -63,5 +64,18 @@ export class LivrosService {
             }
 
             return resultado[0]
+        }
+        //Atualizar Dados
+        async atulizar(id: number, dados: updateLivroDto){//eu coloco update dentro de dados pra conseguir trazer o update.dto para aqui, e id:number é porque vamos atualizar por id
+            //Antes de realizar a atualização buscamos o livro por ID e caso o livro não exista o método 'BuscarPorId' já lança a exceção do NotFound e tambem usamos pra procurar o id ele não vai exibir o id porque lá no controller a função atualizar nao vai liberar isso. no final utilizaremos a buscar por id só pra buscar o id e exibir o erro
+            await this.buscaPorId(id)//eu
+
+            //esse "[dados.titulo, dados.autor, dados.ano, dados.disponivel, id]" é mesma coisa do POST lá em cima "const { titulo, autor, ano, disponivel } = createLivroDto" a diferencia é que aqui não estamos passando os valores do DTO para uma variavel e sim direto para o codigo sql 
+            await this.databaseService.query('UPDATE livro SET titulo = ?, autor = ?, ano = ?, disponivel = ? WHERE id = ?', [dados.titulo, dados.autor, dados.ano, dados.disponivel, id])
+            
+            //Se a atualizção for bem sucessida o usuario recebera uma mensagem
+            return{
+                mensagem: 'livro atualizado com sucesso'
+            }
         }
 }
