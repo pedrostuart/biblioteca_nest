@@ -1,7 +1,7 @@
 import { IsBoolean, isBoolean, IsInt, IsOptional, IsNotEmpty, isString, IsString, Max, min } from "class-validator";
 //no update utilizamos o IsOptional ao inves do isNotEmpty pois nao é obrigatorio a pessoa atualizar aquele campo
 
-//A "?" depois das variaveis significa que é um capo que pode ser enviado informações ou não
+//A "?" depois das variaveis significa que é um campo que pode ser enviado informações ou não
 export class updateLivroDto{
     @IsString()
     @IsOptional()// preenche se quiser
