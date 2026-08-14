@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAutorDto } from './dto/create-autor.dto'; 
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { DatabaseService } from 'src/database/database.service';
+import { updateAutorDto } from './dto/update-autor.dto';
 @Injectable()
 export class AutoresService {
     
@@ -40,5 +41,28 @@ export class AutoresService {
         }
 
         return resultado[0]
+    }
+
+    async atualizar(id:number, dados: updateAutorDto){
+        const {nome, nacionalidade, ano_nascimento} = dados
+        await this.exibirPorId(id)
+        const resultado = await this.databaseService.query('UPDATE autor SET nome = ?, nacionalidade = ?, ano_nascimento = ? WHERE id = ?', [nome, nacionalidade, ano_nascimento, id])
+        return{
+            mensagem: 'Atualizado com sucesso',
+            livro:{
+                id: id,
+                nome: nome,
+                nacionalidade: nacionalidade,
+                ano_nascimento: ano_nascimento
+            }
+        }
+    }
+
+    async deletar(id: number){
+        await this.exibirPorId(id)
+        const resultado = await this.databaseService.query('DELETE FROM autor WHERE id = ?', [id])
+        return {
+            mensagem: `autor do id: ${id} deletado`
+        }
     }
 }
