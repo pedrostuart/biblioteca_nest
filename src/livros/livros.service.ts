@@ -75,7 +75,24 @@ export class LivrosService {
             
             //Se a atualizção for bem sucessida o usuario recebera uma mensagem
             return{
-                mensagem: 'livro atualizado com sucesso'
+                mensagem: 'livro atualizado com sucesso',
+                livro:{
+                    id: id,
+                    titulo: dados.titulo,
+                    autor: dados.autor,
+                    ano: dados.ano,
+                    disponivel: dados.disponivel
+                }
+            }
+        }
+
+        //Deletar Dados
+
+        async remover(id: number){
+            await this.buscaPorId(id)
+            await this.databaseService.query('DELETE FROM livro WHERE id = ?', [id])
+            return {
+                mensagem: `livro do ${id} excluido com sucesso`
             }
         }
 }

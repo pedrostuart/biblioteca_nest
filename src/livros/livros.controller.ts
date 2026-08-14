@@ -1,6 +1,7 @@
 //Controller vai falar quando o service vai ser executado
 import { Controller, Body, Post, Get, Param,/*Param é o que a gente coloca na url*/ ParseIntPipe, /*ParseIntPipe define que o id tem que ser um numero inteiro*/ 
-Put} from '@nestjs/common';
+Put,
+Delete} from '@nestjs/common';
 import { CreateLivroDto } from './dto/create-livro.dto';
 import { LivrosService } from './livros.service';
 import { updateLivroDto } from './dto/update-livro.dto';
@@ -29,5 +30,9 @@ export class LivrosController {
     @Put(':id')
     atualizar(@Param('id', ParseIntPipe) id: number, @Body() dados:updateLivroDto){ //lá no service estamos tipando e adicionando no banco aqui, estamos tipando o valores recebidos do @Body e do @Param (preenchendo eles)
         return this.livrosService.atulizar(id, dados)
+    }
+    @Delete(':id')
+    remover(@Param('id', ParseIntPipe) id:number){//o id esta em '' dentro do Param poruqe o param é o que esta dentro da url, ou seja, pega o valor(numero) que esta dentro da variavel id da url e definie como numero inteiro com ParseIntPipe
+        return this.livrosService.remover(id)
     }
 }
