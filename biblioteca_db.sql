@@ -12,5 +12,12 @@ create table `autor`(
 	id int auto_increment primary key,
     nome varchar(100) not null,
     nacionalidade varchar(100) not null,
-    ano_nascimento int not null
+    ano_nascimento int(4) not null
+)
+
+create table `usuario`(
+	id int auto_increment primary key,
+    nome varchar(200) not null,
+    email varchar(200) not null,
+    senha varchar(255) not null
 )

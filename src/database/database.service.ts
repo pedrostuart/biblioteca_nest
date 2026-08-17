@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';//vamos pegar os dados do .env
 import { createPool, Pool } from 'mysql2/promise'; //decorators para a criação do banco de dados
 @Injectable()
 
