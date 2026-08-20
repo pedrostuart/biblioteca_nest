@@ -5,7 +5,8 @@ Delete} from '@nestjs/common';
 import { CreateLivroDto } from './dto/create-livro.dto';
 import { LivrosService } from './livros.service';
 import { UpdateLivroDto } from './dto/update-livro.dto';
-import { ApiTags/*Pra definir secções*/ , ApiResponse/*A resposta(statur)*/ , ApiOperation/*Explicação do endpoint*/ } from '@nestjs/swagger';
+import { ApiTags/*Pra definir secções*/ , ApiResponse/*A resposta(statur)*/ , ApiOperation,/*Explicação do endpoint*/ 
+ApiBearerAuth} from '@nestjs/swagger';
 import { UseGuards } from '@nestjs/common';//Pra eu poder usar a proteção de rota
 import { AuthGuard } from 'src/auth/auth.guard';
 
@@ -33,6 +34,7 @@ export class LivrosController {
         description: 'Não foi possivel cadastrar o livro'
     })
     @UseGuards(AuthGuard)//Use Guarde e dentro do () qual guard eu quero usar
+    @ApiBearerAuth()
     criar(@Body() createLivroDto: CreateLivroDto){//puxando a função criar || no service e no controller eu estou aplicando as regras com o CreateLivroDto, é uma regra que tem que ser seguida(tipar essas coisas), mas da pra entender melhor se pensar que no service eu jogo no banco e aqui eu aplico as regras
         //O body captura os dados enviados no corpo da requisição
         //O DTO define como esses dados deverão ser validadedos

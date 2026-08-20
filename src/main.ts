@@ -23,6 +23,7 @@ async function bootstrap() {
   .setTitle("Api Biblioteca") //Titulo do documento
   .setDescription("API para gerenciamento da biblioteca")// Descrição
   .setVersion('1.0')//Versão do documento
+  .addBearerAuth()
   .build()//Comando para a construção do documento(vai lá criar) // build sempre tem que estar em ultimo da lista os outros tanto faz
   const documento = SwaggerModule.createDocument(app /*A nossa aplicação (app.module)*/, config/*A construção*/ /*Pegando nossa aplicação e aplicando a contrução do documento apartir dela*/)
   SwaggerModule.setup("api_biblioteca", app, documento)/*com o setup eu consigo meio que a rota pra conseguir acessar a documentação pela internet, definindo o caminho sendo "localhost:3000/api_biblioteca"*/
