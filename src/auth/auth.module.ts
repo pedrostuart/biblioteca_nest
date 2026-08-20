@@ -5,9 +5,10 @@ import { DatabaseModule } from 'src/database/database.module';
 import { JwtModule } from '@nestjs/jwt'; //JWT = segurança entre rotas, autorização de um usuario, permite fazer a criação do token
 import { ConfigService } from '@nestjs/config';// lê o .env precisamos para ver o JWT_SCRET
 import { sign } from 'crypto';
+import { AuthGuard } from './auth.guard';
 
 @Module({
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   controllers: [AuthController],
   imports: [DatabaseModule,
     //AQUI é a permissão pra gera o token
@@ -21,6 +22,7 @@ import { sign } from 'crypto';
         }
       })
     })
-  ]
+  ],
+  exports: [JwtModule, AuthGuard]/*exportandi o "AuthGuard" para conseguir exportar nossas regras*/ 
 })
 export class AuthModule {}
