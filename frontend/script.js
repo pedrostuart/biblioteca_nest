@@ -1,4 +1,4 @@
-const { error } = require("node:console")
+
 
 //Para pegar uma api precisamos do url dela, como é uma api que eu mesmo criei(api local) eu pego o localhost, mas diferentes api externas tem diferentes urls
 const API_URL = 'http://localhost:3000/livros'
@@ -36,32 +36,32 @@ async function buscarLivros() {
 //Função responsavel por exibir os livros
 function mostrarLivros(livros){
     //Limpa a tabela antes de inserir,tipo um refresh, os dados ou seja (na da pra acumular)
-    listaLivros.innerHTML = ``
+    listaLivros.innerHTML = ''
     if(livros.length === 0){
         //Caso nao exista livro cadastrado, eu não consigo exibir nada ou seja mando uma mensagem falando que nao é possivel
         listaLivros.innerHTML = `
         <tr class="linha-vazia">
-            <td colsapan=6>
+            <td colspan=6>
                 Nenhum livro cadastrado
             </td>
-        </td>    
+        </tr>    
         `
         return
     }
-    livros.ForEach((livros) =>{//percorrendo o array de livros
+    livros.forEach((livro) =>{//percorrendo o array de livros
         const linha = document.createElement('tr')
         linha.innerHTML = `
             <td>${livro.id}</td>
             <td>${livro.titulo}</td>
             <td>${livro.autor}</td>
             <td>${livro.ano}</td>
-            <td>>
+            <td>
                 <span class="${livro.disponivel ? 'disponivel' : 'indisponivel'}">
                     ${livro.disponivel ? 'Sim' : 'Não'}
                 </span>
             </td>
             <td>
-            <button class="botao botao-editar" onclick='editarLivro(${livro.id})"> Editar </button>
+            <button class="botao botao-editar" onclick="editarLivro(${livro.id})"> Editar </button>
             <button class="botao botao-excluir" onclick="excluirLivro(${livro.id})"> Excluir </button>
             </td>
 
