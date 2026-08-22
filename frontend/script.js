@@ -112,7 +112,7 @@ async function cadastrarLivro(event) {
     //Se der tudo certo com o cadastramento do livro
     mostrarMensagem('Livro cadastrado com sucesso', 'sucesso')
     //Limpa os campos dos formulario apos o cadastro
-    formLivro.requestFullscreen()
+    formLivro.reset()
     //Atualizamos a lista de livros
     buscarLivros()
     }catch(erro){
