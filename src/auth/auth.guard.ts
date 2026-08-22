@@ -34,7 +34,12 @@ export class AuthGuard implements CanActivate{
             const payload = await this.jwtService.verifyAsync(token)//payload = dados dentro do token, estou verificando o dados dentro do token, id, email e validade(tempo de 1h)
 
             //E salvamos as informações do usuario na requisição
+
+            /*TODA REQUISIÇÂO (POST)/livros tem dados do usuario dentro dela, a unica coisa que estamos fazendo aqui é colocar os dados do token preenchendo esses dados no header da requisição e assim permitindo o acesso para o usuario*/
+            
             request.usuario = payload //botamos dentro da requisição do usuario o dados fornecido permitindo acessar a rota
+
+            
         }catch{
             //Caso não seja valido ou não estaja dentro do prazo, exibimos uma mensagem "erro"
             throw new UnauthorizedException('Token invalido ou expirado')

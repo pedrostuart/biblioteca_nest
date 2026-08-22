@@ -23,7 +23,7 @@ export class AuthController {
     cadastrar(@Body() createUsuarioDto: CreateUsuarioDto){
         return this.authService.cadastrar(createUsuarioDto)
     }
-
+    
     @Post('login')
     @ApiOperation({
         summary: "Logar"

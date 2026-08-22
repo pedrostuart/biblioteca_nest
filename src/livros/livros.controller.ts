@@ -33,8 +33,8 @@ export class LivrosController {
         status: 404,
         description: 'Não foi possivel cadastrar o livro'
     })
-    @UseGuards(AuthGuard)//Use Guarde e dentro do () qual guard eu quero usar
-    @ApiBearerAuth()
+    //@UseGuards(AuthGuard)//Use Guarde e dentro do () qual guard eu quero usar
+    //@ApiBearerAuth()
     criar(@Body() createLivroDto: CreateLivroDto){//puxando a função criar || no service e no controller eu estou aplicando as regras com o CreateLivroDto, é uma regra que tem que ser seguida(tipar essas coisas), mas da pra entender melhor se pensar que no service eu jogo no banco e aqui eu aplico as regras
         //O body captura os dados enviados no corpo da requisição
         //O DTO define como esses dados deverão ser validadedos
